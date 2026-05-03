@@ -82,3 +82,11 @@ app.listen(PORT, () => {
   console.log(`  ├─ File Upload:  /api/videos/upload/file`);
   console.log(`  └─ Subscribers:  /api/subscribers\n`);
 });
+
+// ─── Keep Alive (منع النوم على Render) ────
+const https = require('https');
+setInterval(() => {
+  https.get('https://abdulmalek-backend.onrender.com/', (res) => {
+    console.log(`Keep-alive ping: ${res.statusCode}`);
+  }).on('error', () => {});
+}, 14 * 60 * 1000); // كل 14 دقيقة
