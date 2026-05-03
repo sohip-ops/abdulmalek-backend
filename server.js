@@ -11,6 +11,7 @@ const connectDB = require('./db');
 
 const videosRouter      = require('./routes/videos');
 const subscribersRouter = require('./routes/subscribers');
+const settingsRouter    = require('./routes/settings');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -45,6 +46,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // ─── Routes ───────────────────────────────
 app.use('/api/videos',      videosRouter);
 app.use('/api/subscribers', subscribersRouter);
+app.use('/api/settings',    settingsRouter);
 
 // ─── Health Check ─────────────────────────
 app.get('/', (req, res) => {
