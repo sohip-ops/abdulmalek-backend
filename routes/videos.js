@@ -8,7 +8,8 @@ const { adminAuth } = require('../middleware/auth');
 const upload   = require('../middleware/upload');
 const {
   getVideos, getVideo, addVideo, uploadVideo,
-  updateVideo, deleteVideo, incrementView
+  updateVideo, deleteVideo, incrementView,
+  updateVideoCategory
 } = require('../controllers/videos');
 
 // Public
@@ -23,5 +24,8 @@ router.delete('/:id',        adminAuth, deleteVideo); // DELETE /api/videos/:id
 
 // Admin — رفع ملف مباشر
 router.post('/upload/file',  adminAuth, upload.single('video'), uploadVideo); // POST /api/videos/upload/file
+
+// Admin — تحديث التصنيف فقط
+router.put('/:id/category', adminAuth, updateVideoCategory); // PUT /api/videos/:id/category
 
 module.exports = router;
