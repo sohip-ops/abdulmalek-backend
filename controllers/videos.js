@@ -130,4 +130,27 @@ const incrementView = async (req, res) => {
   }
 };
 
-module.exports = { getVideos, getVideo, addVideo, uploadVideo, updateVideo, deleteVideo, incrementView };
+// PUT /api/videos/:id/category — تحديث التصنيف فقط
+const updateVideoCategory = async (req, res) => {
+  try {
+    const { category } = req.body;
+
+    if (category === undefined) {
+      return res.status(400).json({ error: 'حقل category مطلوب' });
+    }
+
+    const video = await Video.findByIdAndUpdate(
+      req.params.id,
+      { category: category.trim() },
+      { new: true, runValidators: true }
+    );
+
+    if (!video) return res.status(404).json({ error: 'الفيديو غير موجود' });
+
+    res.json({ success: true, data: video, message: '✓ تم تحديث التصنيف' });
+  } catch (err) {
+    res.status(500).json({ error: 'خطأ في تحديث التصنيف', details: err.message });
+  }
+};
+
+module.exports = { getVideos, getVideo, addVideo, uploadVideo, updateVideo, deleteVideo, incrementView, updateVideoCategory };
