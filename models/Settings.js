@@ -12,6 +12,7 @@ const settingsSchema = new mongoose.Schema({
     li: { type: String, default: '' }
   },
   bgVideoUrl: { type: String, default: '' },
+  videoLoopUrl: { type: String, default: '' },
   updatedAt: { type: Date, default: Date.now }
 });
 
